@@ -9,7 +9,14 @@ let gameOver = false
 let startBtn = document.getElementById('start-btn')
 let history = []
 let historyArea = document.getElementById("history-area")
+let imageArea = document.getElementById('image-area')
 
+
+userInput.addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+        startBtn.click()
+    }
+})
 //user에 포커스 두기
 userInput.addEventListener("focus",()=>{
     userInput.value = ""
@@ -51,12 +58,17 @@ const tryGame=()=>{
        
 
        if(userInput.value <random)
-        { result.textContent = "숫자를 올리세요! "
+        { 
+            result.textContent = "숫자를 올리세요! "
+              imageArea.textContent = "🔼"
 
         }else if(userInput.value >random){ 
         result.textContent = "숫자를 내리세요! "
-
-       }else{ result.textContent = "정답입니다!"
+         imageArea.textContent = "🔽"
+        
+       }else{ 
+        result.textContent = "정답입니다!"
+        imageArea.textContent = "🎉"
          gameOver = true 
         }
           
@@ -90,9 +102,9 @@ const reset = ()=>{
     maxChance = 3
     chance = 0
     chanceArea.textContent  =`남은 기회 : ${resultChance}번`
-     result.textContent = `숫자를 ?`
-       historyArea.textContent = `입력된 값 :`
-     
+    result.textContent = `숫자를 ?`
+    historyArea.textContent = `입력된 값 :`
+      imageArea.textContent = "🎯"
    gameOver = false
    startBtn.disabled = false
    userInput.value = ""
