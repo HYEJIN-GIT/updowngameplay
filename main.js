@@ -1,79 +1,103 @@
-//랜덤 번호 지정
-//유저가 번호를 입력한다 go라는 버튼 누름
-//랜덤 번호가 < 유저번호 down
-//랜덤 번호가 > 유저번호  up
-//reset버튼을 누르면 게임 리셋
-//5번의 기회를 다 쓰면 게임이 끝난다 (더이상 추측 불가, 버튼이 disable)
-//유저가 1~100 범위 밖에 숫자를 입력하면 알려준다. 기회를 깎지 않는다.
-//유저가 이미 입력한 숫자를 또 입력하면 알려준다 기회를 깎지 않는다.
-
-let computerNum =0
-let playButton = document.getElementById("play-button")
-let userInput = document.getElementById("user-input")
-let resultArea = document.getElementById("result-area")
-let resetButton = document.getElementById('reset-button')
-let chance =5
+let result = document.getElementById('result')
+let random = 0
+let chance = 0
+let userInput = document.getElementById('user-input')
+let chanceArea =document.getElementById('chance-area')
+let maxChance = 3
+let resultChance = 3
 let gameOver = false
-let chanceArea = document.getElementById('chance-area')
+let startBtn = document.getElementById('start-btn')
 let history = []
+let historyArea = document.getElementById("history-area")
+
+//user에 포커스 두기
 userInput.addEventListener("focus",()=>{
     userInput.value = ""
 })
-playButton.addEventListener("click",play)
-resetButton.addEventListener("click",reset)
 
-const pickRandomNum = ()=>{
-      computerNum = Math.floor(Math.random()*100) + 1
-    console.log(computerNum)
+//숫자 랜덤 뽑기
+const randomPick =()=>{
+    random = Math.floor(Math.random()*100) + 1
+    console.log(random)
 }
-pickRandomNum()
+randomPick()
 
-function play(){
 
+//게임 시작
+const tryGame=()=>{
+    if(userInput.value === ""){
+        alert("숫자가 비어 있습니다. 1과 100 사이의 숫자를 입력해주세요!")
+        return
+    }
+
+    if(userInput.value <1 || userInput.value>100){
+        alert("1과 100 사이의 숫자를 입력해주세요!")
+        return
+    }
+    if(history.includes(userInput.value)){
+        alert("이미 입력된 숫자입니다!")
+        return
+    }
   
-    let userValue = userInput.value
-    if(userValue<1 || userValue>100){
-        resultArea.textContent = "1과 100사이 숫자를 입력해주세요"
-        return
-    }
-    if(history.includes(userValue)){
-         resultArea.textContent = "이미 입력된 값입니다."
-        return
-    }
-    chance--
-    chanceArea.textContent = `남은기회 : ${chance}`
-    console.log(userValue)
-    if(userValue<computerNum){
-        resultArea.textContent = "UP!!"
-    }else if(userValue>computerNum){
-       resultArea.textContent = "Down!!"
-    }else {
-       resultArea.textContent = "맞췄습니다!!"
-       gameOver = true
-    }
+    
+        chance++;
+        resultChance--
+        
+        let percent = (chance / maxChance) * 100;
+        document.querySelector(".progress").style.width = percent + "%"
+        document.querySelector(".circle").style.left = percent + "%"
+       chanceArea.textContent  =`남은 기회 ${resultChance}번`
+       
+       
 
-    history.push(userValue)
+       if(userInput.value <random)
+        { result.textContent = "숫자를 올리세요! "
 
-    if(chance<1){
+        }else if(userInput.value >random){ 
+        result.textContent = "숫자를 내리세요! "
+
+       }else{ result.textContent = "정답입니다!"
+         gameOver = true 
+        }
+          
+    if(resultChance <1 && !gameOver){
+        result.textContent = ` 게임 오버! 정답은 ${random} 입니다`
         gameOver = true
     }
     if(gameOver){
-        playButton.disabled = true;
+        startBtn.disabled = true
     }
-   
+         
+    history.push(userInput.value)
+    historyArea.textContent = `입력된 값 :${history.join(",")}`
+    console.log(history)
 
 
+ 
+  
 }
 
-function reset(){
-    //userinput 창 깨긋하게 정리
-    // 새로운 번호 생성
-    userInput.value = ""
-    chance = 5
-    chanceArea.textContent = `남은기회 : ${chance}`
-    pickRandomNum()
-    gameOver = false
-    playButton.disabled = false
-    resultArea.textContent = "결과값이 여기 나옵니다"
 
+   
+
+    
+
+const correct= ()=>{
+result.textContent = `정답은 ${random} 입니다`
+}
+const reset = ()=>{
+    resultChance = 3 
+    maxChance = 3
+    chance = 0
+    chanceArea.textContent  =`남은 기회 : ${resultChance}번`
+     result.textContent = `숫자를 ?`
+       historyArea.textContent = `입력된 값 :`
+     
+   gameOver = false
+   startBtn.disabled = false
+   userInput.value = ""
+   history = []
+   document.querySelector(".progress").style.width = "0%"
+   document.querySelector(".circle").style.left = "0%"
+   randomPick()
 }

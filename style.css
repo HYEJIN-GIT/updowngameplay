@@ -1,0 +1,169 @@
+@font-face {
+    font-family: 'PyeongChangPeace-Bold.otf';
+    src: url('./font/PyeongChangPeace-Bold.otf');
+}
+
+body {
+    background-color: rgb(203, 203, 203);
+    margin: 0px;
+    font-family: 'PyeongChangPeace-Bold.otf';
+    color: white;
+    text-shadow:
+    -2px -2px 0 black,
+     1px -2px 0 black,
+    -2px  1px 0 black,
+     2px  1px 0 black;
+}
+
+.container {
+    max-width: 800px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+ 
+}
+
+.border-area{
+  
+    background-color: rgb(117, 117, 117);
+    opacity: 70%;
+    height: 90vh;
+    width: 650px;
+   
+    border-radius: 50px;
+}
+.img-section{
+    display: flex;
+    justify-content: center;
+}
+.img-area{
+    margin-top: 40px;
+    border-radius: 40px;
+    width: 500px;
+    height: 400px;
+    opacity: 100%;
+    
+
+}   
+.result-area{
+    margin-top: 40px;
+    font-size: 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+.input-area{
+    display: flex;
+    justify-content: center;
+ 
+}
+.input-area button{
+    margin: 10px;
+    border-radius: 20px;
+    border: none;
+    width: 100px;
+}
+#user-input{
+margin-top: 8px;
+width: 300px;
+height: 30px;
+border-radius: 10px;
+border: none;
+text-align: center;
+}
+
+button:hover:active{
+    color: #ffffff;
+    background-color: #171717;
+}
+.button-area{
+    display: flex;
+    justify-content: center;
+ 
+
+}
+
+.button-area button{
+    margin: 10px;
+    border-radius: 10px;
+    border: none;
+    width: 70px;
+}
+
+.chance-bar{
+    width: 400px;
+    height: 15px;
+    background-color: #aeacac;
+    border-radius: 20px;
+    position: relative;      
+    margin: 20px auto;
+}
+
+.progress{
+    width: 0%;
+    height: 100%;
+    background-color: #e7e7e7;
+    transition: width 0.4s ease;
+}
+.circle{
+    width: 18px;
+    height: 18px;
+    background-color: #f6f7f6;
+    border-radius: 50%;
+    position: absolute;     
+    top: 50%;
+    left: 0%;
+    transform: translate(-50%, -50%);
+    transition: left 0.4s ease;
+}
+
+
+@media (max-width: 768px){
+
+    .border-area{
+        width: 95%;
+        height: auto;
+        padding-bottom: 30px;
+    }
+
+    .img-area{
+        width: 90%;
+        height: auto;
+    }
+    .result-area{
+        font-size: 14px;
+    }
+
+    .chance-bar{
+        width: 90%;
+    }
+
+    #user-input{
+        width: 70%;
+        height: 40px;
+    }
+
+    .input-area{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .input-area button{
+        width: 40%;
+        height: 30px;
+    }
+
+    .button-area{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .button-area button{
+        width: 40%;
+        height: 30px;
+    }
+
+}
