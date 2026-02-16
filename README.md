@@ -50,8 +50,7 @@ history.push(userInput.value)
 
 - 🎨 폰트 사용 : PyeongChangPeace-Bold.otf (로컬 폰트 사용)
 
-- 🚀 배포 링크 :
-
+- 🚀 배포 링크 : https://upanddownplay.netlify.app/
 
 
 
